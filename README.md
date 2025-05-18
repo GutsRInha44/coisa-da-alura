@@ -4,3 +4,36 @@ Com inteligência emocional e conhecimento sobre dinâmicas afetivas, esse bot p
 
 Quer encontrar o amor ou entender melhor os sentimentos? Esse bot será seu guia, seu apoio e sua fonte de inspiração. 💙
 NOME: RinhasMATCH.ia
+
+
+
+
+
+
+
+from google.colab import userdata
+userdata.get('GOOGLE_API_KEY')
+
+
+
+def execute_tool(response):
+   
+    print("Tool call requested (simulated): Google Search")
+   
+ 
+    return "Tool execution result (simulated): Information found."
+
+prompt = input("me fale seu problema 💔...")
+while prompt != "Arrombados":
+    response = chat.send_message(prompt)
+   
+    if hasattr(response, 'tool_calls') and response.tool_calls:
+        tool_result = execute_tool(response)
+    
+        response = chat.send_message(types.ToolOutput(tool_code=response.tool_calls[0].tool_code, contents=[types.Part(text=tool_result)]))
+        print("respostas", response.text)
+    else:
+        print("respostas", response.text)
+    print("\n\n")
+    prompt = input("me fale seu problema 💔...")
+  
